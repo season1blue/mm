@@ -86,7 +86,19 @@ class MultiModalBartEncoder(nn.Module):
         """embed textual and visual inputs and combine them into one embedding"""
         mask = (input_ids == self.img_feat_id) | (input_ids == self.cls_token_id)
 
+
+        image_tensor = torch.cat([i.unsqueeze(0) for i in image_features], dim=0) # 32, 36, 2048
+        # input_ids 32,72
         embedded = self.embed_tokens(input_ids)  # [B,l,h]  32,72,768
+        image_length = image_tensor.size(1) + 1 + 1  # <img> XXXX </img>
+        text_tensor = embedded[:, image_length:, :]
+        # text_ids = input_ids[:, image_length:]
+        print(text_tensor.size())
+        print(image_tensor.size())
+        exit()
+
+
+
         embedded_images = self.embed_images(image_features)
 
         # print('mask shape', mask.shape)
