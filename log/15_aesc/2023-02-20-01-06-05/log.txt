@@ -1,0 +1,168 @@
+2023-02-20 01:06:05,970 INFO ============ Initialed with 1 GPU(s) =============
+2023-02-20 01:06:05,971 INFO dataset: [['twitter15', './src/data/jsons/twitter15_info.json']]
+2023-02-20 01:06:05,971 INFO checkpoint_dir: ./
+2023-02-20 01:06:05,971 INFO bart_model: facebook/bart-base
+2023-02-20 01:06:05,971 INFO log_dir: log/15_aesc
+2023-02-20 01:06:05,971 INFO model_config: config/pretrain_base.json
+2023-02-20 01:06:05,972 INFO text_only: False
+2023-02-20 01:06:05,972 INFO checkpoint: ./data/checkpoint/pytorch_model.bin
+2023-02-20 01:06:05,972 INFO lr_decay_every: 4
+2023-02-20 01:06:05,972 INFO lr_decay_ratio: 0.8
+2023-02-20 01:06:05,972 INFO epochs: 35
+2023-02-20 01:06:05,973 INFO eval_every: 1
+2023-02-20 01:06:05,973 INFO lr: 7e-05
+2023-02-20 01:06:05,973 INFO num_beams: 4
+2023-02-20 01:06:05,973 INFO continue_training: False
+2023-02-20 01:06:05,973 INFO warmup: 0.1
+2023-02-20 01:06:05,974 INFO dropout: None
+2023-02-20 01:06:05,974 INFO classif_dropout: None
+2023-02-20 01:06:05,974 INFO attention_dropout: None
+2023-02-20 01:06:05,974 INFO activation_dropout: None
+2023-02-20 01:06:05,974 INFO grad_clip: 5.0
+2023-02-20 01:06:05,974 INFO gpu_num: 1
+2023-02-20 01:06:05,974 INFO cpu: False
+2023-02-20 01:06:05,975 INFO amp: False
+2023-02-20 01:06:05,975 INFO master_port: 12355
+2023-02-20 01:06:05,975 INFO batch_size: 16
+2023-02-20 01:06:05,975 INFO seed: 66
+2023-02-20 01:06:05,975 INFO num_workers: 0
+2023-02-20 01:06:05,975 INFO max_len: 10
+2023-02-20 01:06:05,976 INFO max_len_a: 0.6
+2023-02-20 01:06:05,976 INFO bart_init: 1
+2023-02-20 01:06:05,976 INFO check_info: 
+2023-02-20 01:06:05,976 INFO is_check: 0
+2023-02-20 01:06:05,976 INFO task: 
+2023-02-20 01:06:05,976 INFO Loading model...
+2023-02-20 01:06:05,982 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:06:16,034 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:06:26,589 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-20 01:06:26,702 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:06:34,998 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-20 01:06:35,002 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-20 01:06:40,167 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-20 01:06:42,738 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:06:55,123 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-20 01:06:55,127 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:07:04,693 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-20 01:07:11,621 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:07:26,307 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-20 01:07:26,310 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-20 01:07:33,896 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-20 01:07:36,353 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:07:39,579 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-20 01:07:39,583 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-20 01:07:48,319 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-20 01:07:48,815 INFO Loading data...
+2023-02-20 01:07:48,962 INFO ==================== Epoch 1 =====================
+2023-02-20 01:10:15,601 INFO DEV  aesc_p:39.35 aesc_r:35.74 aesc_f:37.46
+2023-02-20 01:10:15,602 INFO TEST  aesc_p:40.78 aesc_r:37.32 aesc_f:38.97
+2023-02-20 01:10:15,602 INFO ==================== Epoch 2 =====================
+2023-02-20 01:11:14,753 INFO DEV  aesc_p:48.11 aesc_r:47.77 aesc_f:47.94
+2023-02-20 01:11:14,754 INFO TEST  aesc_p:53.02 aesc_r:53.33 aesc_f:53.17
+2023-02-20 01:11:14,754 INFO ==================== Epoch 3 =====================
+2023-02-20 01:12:11,916 INFO DEV  aesc_p:56.04 aesc_r:55.44 aesc_f:55.73
+2023-02-20 01:12:11,921 INFO TEST  aesc_p:60.76 aesc_r:61.52 aesc_f:61.14
+2023-02-20 01:12:11,921 INFO ==================== Epoch 4 =====================
+2023-02-20 01:13:10,096 INFO DEV  aesc_p:59.94 aesc_r:55.88 aesc_f:57.84
+2023-02-20 01:13:10,096 INFO TEST  aesc_p:61.08 aesc_r:59.02 aesc_f:60.03
+2023-02-20 01:13:10,096 INFO ==================== Epoch 5 =====================
+2023-02-20 01:14:07,613 INFO DEV  aesc_p:61.41 aesc_r:59.0 aesc_f:60.18
+2023-02-20 01:14:07,613 INFO TEST  aesc_p:63.33 aesc_r:62.3 aesc_f:62.81
+2023-02-20 01:14:07,614 INFO ==================== Epoch 6 =====================
+2023-02-20 01:15:06,384 INFO DEV  aesc_p:61.34 aesc_r:62.21 aesc_f:61.77
+2023-02-20 01:15:06,384 INFO TEST  aesc_p:63.45 aesc_r:65.28 aesc_f:64.35
+2023-02-20 01:15:06,384 INFO ==================== Epoch 7 =====================
+2023-02-20 01:16:05,041 INFO DEV  aesc_p:63.94 aesc_r:63.99 aesc_f:63.96
+2023-02-20 01:16:05,042 INFO TEST  aesc_p:63.18 aesc_r:64.03 aesc_f:63.6
+2023-02-20 01:16:05,042 INFO ==================== Epoch 8 =====================
+2023-02-20 01:17:02,017 INFO DEV  aesc_p:60.0 aesc_r:59.63 aesc_f:59.81
+2023-02-20 01:17:02,018 INFO TEST  aesc_p:63.1 aesc_r:63.65 aesc_f:63.37
+2023-02-20 01:17:02,018 INFO ==================== Epoch 9 =====================
+2023-02-20 01:17:58,631 INFO DEV  aesc_p:60.04 aesc_r:59.71 aesc_f:59.87
+2023-02-20 01:17:58,631 INFO TEST  aesc_p:63.29 aesc_r:62.68 aesc_f:62.98
+2023-02-20 01:17:58,631 INFO ==================== Epoch 10 ====================
+2023-02-20 01:19:00,725 INFO DEV  aesc_p:57.55 aesc_r:58.11 aesc_f:57.83
+2023-02-20 01:19:00,725 INFO TEST  aesc_p:61.6 aesc_r:63.26 aesc_f:62.42
+2023-02-20 01:19:00,726 INFO ==================== Epoch 11 ====================
+2023-02-20 01:19:59,855 INFO DEV  aesc_p:55.61 aesc_r:59.63 aesc_f:57.55
+2023-02-20 01:19:59,856 INFO TEST  aesc_p:58.57 aesc_r:65.57 aesc_f:61.87
+2023-02-20 01:19:59,856 INFO ==================== Epoch 12 ====================
+2023-02-20 01:20:57,564 INFO DEV  aesc_p:63.03 aesc_r:65.33 aesc_f:64.16
+2023-02-20 01:20:57,564 INFO TEST  aesc_p:64.77 aesc_r:68.08 aesc_f:66.38
+2023-02-20 01:20:57,564 INFO ==================== Epoch 13 ====================
+2023-02-20 01:21:55,019 INFO DEV  aesc_p:57.17 aesc_r:60.07 aesc_f:58.58
+2023-02-20 01:21:55,019 INFO TEST  aesc_p:59.73 aesc_r:64.8 aesc_f:62.16
+2023-02-20 01:21:55,020 INFO ==================== Epoch 14 ====================
+2023-02-20 01:22:57,650 INFO DEV  aesc_p:62.6 aesc_r:61.32 aesc_f:61.95
+2023-02-20 01:22:57,650 INFO TEST  aesc_p:65.38 aesc_r:65.19 aesc_f:65.28
+2023-02-20 01:22:57,650 INFO ==================== Epoch 15 ====================
+2023-02-20 01:24:13,599 INFO DEV  aesc_p:62.29 aesc_r:66.4 aesc_f:64.28
+2023-02-20 01:24:13,600 INFO TEST  aesc_p:63.23 aesc_r:69.14 aesc_f:66.05
+2023-02-20 01:24:13,600 INFO ==================== Epoch 16 ====================
+2023-02-20 01:25:28,712 INFO DEV  aesc_p:61.29 aesc_r:66.31 aesc_f:63.7
+2023-02-20 01:25:28,712 INFO TEST  aesc_p:61.9 aesc_r:67.98 aesc_f:64.8
+2023-02-20 01:25:28,712 INFO ==================== Epoch 17 ====================
+2023-02-20 01:26:46,502 INFO DEV  aesc_p:58.9 aesc_r:61.05 aesc_f:59.96
+2023-02-20 01:26:46,502 INFO TEST  aesc_p:62.66 aesc_r:65.86 aesc_f:64.22
+2023-02-20 01:26:46,502 INFO ==================== Epoch 18 ====================
+2023-02-20 01:27:52,220 INFO DEV  aesc_p:61.87 aesc_r:60.87 aesc_f:61.37
+2023-02-20 01:27:52,220 INFO TEST  aesc_p:65.67 aesc_r:65.48 aesc_f:65.57
+2023-02-20 01:27:52,221 INFO ==================== Epoch 19 ====================
+2023-02-20 01:29:02,444 INFO DEV  aesc_p:60.15 aesc_r:62.83 aesc_f:61.46
+2023-02-20 01:29:02,444 INFO TEST  aesc_p:62.0 aesc_r:66.25 aesc_f:64.06
+2023-02-20 01:29:02,445 INFO ==================== Epoch 20 ====================
+2023-02-20 01:30:10,771 INFO DEV  aesc_p:60.63 aesc_r:61.5 aesc_f:61.06
+2023-02-20 01:30:10,771 INFO TEST  aesc_p:62.78 aesc_r:65.38 aesc_f:64.05
+2023-02-20 01:30:10,771 INFO ==================== Epoch 21 ====================
+2023-02-20 01:31:18,129 INFO DEV  aesc_p:61.31 aesc_r:63.28 aesc_f:62.28
+2023-02-20 01:31:18,129 INFO TEST  aesc_p:64.35 aesc_r:67.89 aesc_f:66.07
+2023-02-20 01:31:18,130 INFO ==================== Epoch 22 ====================
+2023-02-20 01:32:27,538 INFO DEV  aesc_p:62.35 aesc_r:63.9 aesc_f:63.12
+2023-02-20 01:32:27,538 INFO TEST  aesc_p:63.52 aesc_r:66.15 aesc_f:64.81
+2023-02-20 01:32:27,538 INFO ==================== Epoch 23 ====================
+2023-02-20 01:33:38,107 INFO DEV  aesc_p:63.39 aesc_r:64.97 aesc_f:64.17
+2023-02-20 01:33:38,107 INFO TEST  aesc_p:62.34 aesc_r:64.8 aesc_f:63.55
+2023-02-20 01:33:38,107 INFO ==================== Epoch 24 ====================
+2023-02-20 01:34:46,185 INFO DEV  aesc_p:62.78 aesc_r:64.35 aesc_f:63.56
+2023-02-20 01:34:46,185 INFO TEST  aesc_p:62.95 aesc_r:65.38 aesc_f:64.14
+2023-02-20 01:34:46,185 INFO ==================== Epoch 25 ====================
+2023-02-20 01:35:54,443 INFO DEV  aesc_p:63.28 aesc_r:64.35 aesc_f:63.81
+2023-02-20 01:35:54,444 INFO TEST  aesc_p:63.79 aesc_r:65.57 aesc_f:64.67
+2023-02-20 01:35:54,444 INFO ==================== Epoch 26 ====================
+2023-02-20 01:37:02,382 INFO DEV  aesc_p:62.3 aesc_r:63.64 aesc_f:62.96
+2023-02-20 01:37:02,382 INFO TEST  aesc_p:63.41 aesc_r:65.67 aesc_f:64.52
+2023-02-20 01:37:02,382 INFO ==================== Epoch 27 ====================
+2023-02-20 01:38:09,597 INFO DEV  aesc_p:62.51 aesc_r:65.24 aesc_f:63.85
+2023-02-20 01:38:09,597 INFO TEST  aesc_p:63.45 aesc_r:67.31 aesc_f:65.33
+2023-02-20 01:38:09,598 INFO ==================== Epoch 28 ====================
+2023-02-20 01:39:18,166 INFO DEV  aesc_p:62.79 aesc_r:64.97 aesc_f:63.86
+2023-02-20 01:39:18,166 INFO TEST  aesc_p:63.6 aesc_r:66.73 aesc_f:65.13
+2023-02-20 01:39:18,167 INFO ==================== Epoch 29 ====================
+2023-02-20 01:40:27,793 INFO DEV  aesc_p:63.66 aesc_r:65.42 aesc_f:64.53
+2023-02-20 01:40:27,793 INFO TEST  aesc_p:63.89 aesc_r:66.54 aesc_f:65.19
+2023-02-20 01:40:27,793 INFO ==================== Epoch 30 ====================
+2023-02-20 01:41:39,510 INFO DEV  aesc_p:62.35 aesc_r:64.8 aesc_f:63.55
+2023-02-20 01:41:39,510 INFO TEST  aesc_p:63.74 aesc_r:67.79 aesc_f:65.7
+2023-02-20 01:41:39,510 INFO ==================== Epoch 31 ====================
+2023-02-20 01:42:48,162 INFO DEV  aesc_p:62.55 aesc_r:64.62 aesc_f:63.57
+2023-02-20 01:42:48,162 INFO TEST  aesc_p:63.31 aesc_r:67.21 aesc_f:65.2
+2023-02-20 01:42:48,162 INFO ==================== Epoch 32 ====================
+2023-02-20 01:43:55,998 INFO DEV  aesc_p:62.61 aesc_r:65.06 aesc_f:63.81
+2023-02-20 01:43:55,999 INFO TEST  aesc_p:64.02 aesc_r:67.6 aesc_f:65.76
+2023-02-20 01:43:55,999 INFO ==================== Epoch 33 ====================
+2023-02-20 01:45:05,961 INFO DEV  aesc_p:62.66 aesc_r:65.51 aesc_f:64.05
+2023-02-20 01:45:05,962 INFO TEST  aesc_p:62.87 aesc_r:67.12 aesc_f:64.93
+2023-02-20 01:45:05,962 INFO ==================== Epoch 34 ====================
+2023-02-20 01:46:15,771 INFO DEV  aesc_p:63.13 aesc_r:64.71 aesc_f:63.91
+2023-02-20 01:46:15,772 INFO TEST  aesc_p:63.9 aesc_r:66.92 aesc_f:65.38
+2023-02-20 01:46:15,772 INFO ==================== Epoch 35 ====================
+2023-02-20 01:47:24,784 INFO DEV  aesc_p:62.92 aesc_r:64.44 aesc_f:63.67
+2023-02-20 01:47:24,784 INFO TEST  aesc_p:63.84 aesc_r:66.73 aesc_f:65.25
+2023-02-20 01:47:24,784 INFO ====== Training complete in: 0:39:35.822549 ======
+2023-02-20 01:47:24,784 INFO ---------------------------
+2023-02-20 01:47:24,785 INFO BEST DEV:-----
+2023-02-20 01:47:24,785 INFO BEST DEV  aesc_p:63.66 aesc_r:65.42 aesc_f:64.53
+2023-02-20 01:47:24,785 INFO BEST DEV TEST:-----
+2023-02-20 01:47:24,785 INFO BEST DEV--TEST  aesc_p:63.89 aesc_r:66.54 aesc_f:65.19
+2023-02-20 01:47:24,785 INFO BEST TEST:-----
+2023-02-20 01:47:24,785 INFO BEST TEST  aesc_p:64.77 aesc_r:68.08 aesc_f:66.38

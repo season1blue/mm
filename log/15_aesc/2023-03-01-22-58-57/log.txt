@@ -1,0 +1,34 @@
+03/01 22:58:57:  dataset: [['twitter15', './src/data/jsons/twitter15_info.json']]
+03/01 22:58:57:  checkpoint_dir: ./
+03/01 22:58:57:  bart_model: facebook/bart-base
+03/01 22:58:57:  log_dir: log/15_aesc
+03/01 22:58:57:  model_config: config/pretrain_base.json
+03/01 22:58:57:  text_only: False
+03/01 22:58:57:  checkpoint: ./data/checkpoint/pytorch_model.bin
+03/01 22:58:57:  lr_decay_every: 4
+03/01 22:58:57:  lr_decay_ratio: 0.8
+03/01 22:58:57:  epochs: 1
+03/01 22:58:57:  eval_every: 1
+03/01 22:58:57:  lr: 7e-05
+03/01 22:58:57:  num_beams: 4
+03/01 22:58:57:  continue_training: False
+03/01 22:58:57:  warmup: 0.1
+03/01 22:58:57:  dropout: None
+03/01 22:58:57:  classif_dropout: None
+03/01 22:58:57:  attention_dropout: None
+03/01 22:58:57:  activation_dropout: None
+03/01 22:58:57:  grad_clip: 5.0
+03/01 22:58:57:  gpu_num: 1
+03/01 22:58:57:  cpu: False
+03/01 22:58:57:  amp: False
+03/01 22:58:57:  master_port: 12355
+03/01 22:58:57:  batch_size: 32
+03/01 22:58:57:  seed: 66
+03/01 22:58:57:  num_workers: 0
+03/01 22:58:57:  max_len: 10
+03/01 22:58:57:  max_len_a: 0.6
+03/01 22:58:57:  bart_init: 1
+03/01 22:58:57:  check_info: 
+03/01 22:58:57:  is_check: 0
+03/01 22:58:57:  task: 
+03/01 22:59:18:  Epoch 1

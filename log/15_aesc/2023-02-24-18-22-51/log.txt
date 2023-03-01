@@ -1,0 +1,41 @@
+02/24 18:22:51:  dataset: [['twitter15', './src/data/jsons/twitter15_info.json']]
+02/24 18:22:51:  checkpoint_dir: ./
+02/24 18:22:51:  bart_model: facebook/bart-base
+02/24 18:22:51:  log_dir: log/15_aesc
+02/24 18:22:51:  model_config: config/pretrain_base.json
+02/24 18:22:51:  text_only: False
+02/24 18:22:51:  checkpoint: ./data/checkpoint/pytorch_model.bin
+02/24 18:22:51:  lr_decay_every: 4
+02/24 18:22:51:  lr_decay_ratio: 0.8
+02/24 18:22:51:  epochs: 1
+02/24 18:22:51:  eval_every: 1
+02/24 18:22:51:  lr: 7e-05
+02/24 18:22:51:  num_beams: 4
+02/24 18:22:51:  continue_training: False
+02/24 18:22:51:  warmup: 0.1
+02/24 18:22:51:  dropout: None
+02/24 18:22:51:  classif_dropout: None
+02/24 18:22:51:  attention_dropout: None
+02/24 18:22:51:  activation_dropout: None
+02/24 18:22:51:  grad_clip: 5.0
+02/24 18:22:51:  gpu_num: 1
+02/24 18:22:51:  cpu: False
+02/24 18:22:51:  amp: False
+02/24 18:22:51:  master_port: 12355
+02/24 18:22:51:  batch_size: 16
+02/24 18:22:51:  seed: 66
+02/24 18:22:51:  num_workers: 0
+02/24 18:22:51:  max_len: 10
+02/24 18:22:51:  max_len_a: 0.6
+02/24 18:22:51:  bart_init: 1
+02/24 18:22:51:  check_info: 
+02/24 18:22:51:  is_check: 0
+02/24 18:22:51:  task: 
+02/24 18:23:06:  Epoch 1
+02/24 18:24:06:  DEV  aesc_p:49.82   aesc_r:50.18   aesc_f:50.0
+02/24 18:24:06:  TEST  aesc_p:50.9   aesc_r:51.69   aesc_f:51.29
+02/24 18:24:06:  --------------------------------------------------------------------------------
+02/24 18:24:06:  Total traing: 0:01:00.065950
+02/24 18:24:06:  BEST DEV   aesc_p:49.82   aesc_r:50.18   aesc_f:50.0
+02/24 18:24:06:  BEST DEV--TEST   aesc_p:50.9   aesc_r:51.69   aesc_f:51.29
+02/24 18:24:06:  BEST TEST   aesc_p:50.9   aesc_r:51.69   aesc_f:51.29

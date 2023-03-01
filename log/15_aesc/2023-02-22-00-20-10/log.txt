@@ -1,0 +1,57 @@
+2023-02-22 00:20:10,361 INFO ============ Initialed with 1 GPU(s) =============
+2023-02-22 00:20:10,362 INFO dataset: [['twitter15', './src/data/jsons/twitter15_info.json']]
+2023-02-22 00:20:10,363 INFO checkpoint_dir: ./
+2023-02-22 00:20:10,363 INFO bart_model: facebook/bart-base
+2023-02-22 00:20:10,363 INFO log_dir: log/15_aesc
+2023-02-22 00:20:10,364 INFO model_config: config/pretrain_base.json
+2023-02-22 00:20:10,364 INFO text_only: False
+2023-02-22 00:20:10,364 INFO checkpoint: ./data/checkpoint/pytorch_model.bin
+2023-02-22 00:20:10,367 INFO lr_decay_every: 4
+2023-02-22 00:20:10,367 INFO lr_decay_ratio: 0.8
+2023-02-22 00:20:10,368 INFO epochs: 1
+2023-02-22 00:20:10,369 INFO eval_every: 1
+2023-02-22 00:20:10,369 INFO lr: 7e-05
+2023-02-22 00:20:10,378 INFO num_beams: 4
+2023-02-22 00:20:10,379 INFO continue_training: False
+2023-02-22 00:20:10,379 INFO warmup: 0.1
+2023-02-22 00:20:10,379 INFO dropout: None
+2023-02-22 00:20:10,381 INFO classif_dropout: None
+2023-02-22 00:20:10,381 INFO attention_dropout: None
+2023-02-22 00:20:10,382 INFO activation_dropout: None
+2023-02-22 00:20:10,383 INFO grad_clip: 5.0
+2023-02-22 00:20:10,384 INFO gpu_num: 1
+2023-02-22 00:20:10,384 INFO cpu: False
+2023-02-22 00:20:10,385 INFO amp: False
+2023-02-22 00:20:10,385 INFO master_port: 12355
+2023-02-22 00:20:10,386 INFO batch_size: 16
+2023-02-22 00:20:10,386 INFO seed: 66
+2023-02-22 00:20:10,386 INFO num_workers: 0
+2023-02-22 00:20:10,387 INFO max_len: 10
+2023-02-22 00:20:10,388 INFO max_len_a: 0.6
+2023-02-22 00:20:10,388 INFO bart_init: 1
+2023-02-22 00:20:10,388 INFO check_info: 
+2023-02-22 00:20:10,389 INFO is_check: 0
+2023-02-22 00:20:10,389 INFO task: 
+2023-02-22 00:20:10,390 INFO Loading model...
+2023-02-22 00:20:10,394 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:11,419 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-22 00:20:11,422 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:12,410 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:20:12,468 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:14,134 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-22 00:20:14,138 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-22 00:20:14,627 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-22 00:20:16,861 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:18,978 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-22 00:20:18,982 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:20,095 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:20:20,634 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:22,070 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-22 00:20:22,073 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-22 00:20:22,282 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-22 00:20:24,537 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:25,588 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-22 00:20:25,591 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:20:26,864 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:20:27,236 INFO Loading data...
+2023-02-22 00:20:27,329 INFO ==================== Epoch 1 =====================

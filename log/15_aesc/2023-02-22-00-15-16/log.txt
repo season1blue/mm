@@ -1,0 +1,66 @@
+2023-02-22 00:15:16,218 INFO ============ Initialed with 1 GPU(s) =============
+2023-02-22 00:15:16,219 INFO dataset: [['twitter15', './src/data/jsons/twitter15_info.json']]
+2023-02-22 00:15:16,219 INFO checkpoint_dir: ./
+2023-02-22 00:15:16,219 INFO bart_model: facebook/bart-base
+2023-02-22 00:15:16,219 INFO log_dir: log/15_aesc
+2023-02-22 00:15:16,219 INFO model_config: config/pretrain_base.json
+2023-02-22 00:15:16,220 INFO text_only: False
+2023-02-22 00:15:16,220 INFO checkpoint: ./data/checkpoint/pytorch_model.bin
+2023-02-22 00:15:16,220 INFO lr_decay_every: 4
+2023-02-22 00:15:16,220 INFO lr_decay_ratio: 0.8
+2023-02-22 00:15:16,220 INFO epochs: 1
+2023-02-22 00:15:16,221 INFO eval_every: 1
+2023-02-22 00:15:16,221 INFO lr: 7e-05
+2023-02-22 00:15:16,221 INFO num_beams: 4
+2023-02-22 00:15:16,222 INFO continue_training: False
+2023-02-22 00:15:16,222 INFO warmup: 0.1
+2023-02-22 00:15:16,222 INFO dropout: None
+2023-02-22 00:15:16,222 INFO classif_dropout: None
+2023-02-22 00:15:16,223 INFO attention_dropout: None
+2023-02-22 00:15:16,223 INFO activation_dropout: None
+2023-02-22 00:15:16,223 INFO grad_clip: 5.0
+2023-02-22 00:15:16,223 INFO gpu_num: 1
+2023-02-22 00:15:16,223 INFO cpu: False
+2023-02-22 00:15:16,223 INFO amp: False
+2023-02-22 00:15:16,224 INFO master_port: 12355
+2023-02-22 00:15:16,224 INFO batch_size: 16
+2023-02-22 00:15:16,224 INFO seed: 66
+2023-02-22 00:15:16,224 INFO num_workers: 0
+2023-02-22 00:15:16,224 INFO max_len: 10
+2023-02-22 00:15:16,225 INFO max_len_a: 0.6
+2023-02-22 00:15:16,225 INFO bart_init: 1
+2023-02-22 00:15:16,225 INFO check_info: 
+2023-02-22 00:15:16,225 INFO is_check: 0
+2023-02-22 00:15:16,225 INFO task: 
+2023-02-22 00:15:16,225 INFO Loading model...
+2023-02-22 00:15:16,229 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:17,314 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:18,926 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:15:18,981 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:20,197 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-22 00:15:20,201 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-22 00:15:20,951 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-22 00:15:23,162 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:24,496 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-22 00:15:24,499 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:25,488 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:15:26,023 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:27,117 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/facebook/bart-base/config.json HTTP/1.1" 200 0
+2023-02-22 00:15:27,121 DEBUG Starting new HTTPS connection (1): cdn.huggingface.co:443
+2023-02-22 00:15:27,834 DEBUG https://cdn.huggingface.co:443 "HEAD /facebook/bart-base/pytorch_model.bin HTTP/1.1" 200 0
+2023-02-22 00:15:30,072 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:31,273 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-vocab.json HTTP/1.1" 200 0
+2023-02-22 00:15:31,277 DEBUG Starting new HTTPS connection (1): s3.amazonaws.com:443
+2023-02-22 00:15:32,361 DEBUG https://s3.amazonaws.com:443 "HEAD /models.huggingface.co/bert/roberta-large-merges.txt HTTP/1.1" 200 0
+2023-02-22 00:15:32,732 INFO Loading data...
+2023-02-22 00:15:32,821 INFO ==================== Epoch 1 =====================
+2023-02-22 00:16:34,735 INFO DEV  aesc_p:49.82 aesc_r:50.18 aesc_f:50.0
+2023-02-22 00:16:34,735 INFO TEST  aesc_p:50.9 aesc_r:51.69 aesc_f:51.29
+2023-02-22 00:16:34,735 INFO ====== Training complete in: 0:01:01.913998 ======
+2023-02-22 00:16:34,736 INFO ---------------------------
+2023-02-22 00:16:34,736 INFO BEST DEV:-----
+2023-02-22 00:16:34,736 INFO BEST DEV  aesc_p:49.82 aesc_r:50.18 aesc_f:50.0
+2023-02-22 00:16:34,736 INFO BEST DEV TEST:-----
+2023-02-22 00:16:34,737 INFO BEST DEV--TEST  aesc_p:50.9 aesc_r:51.69 aesc_f:51.29
+2023-02-22 00:16:34,737 INFO BEST TEST:-----
+2023-02-22 00:16:34,737 INFO BEST TEST  aesc_p:50.9 aesc_r:51.69 aesc_f:51.29
