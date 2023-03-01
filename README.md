@@ -1,12 +1,6 @@
-# Vision-Language Pre-Training for Multimodal Aspect-Based Sentiment Analysis(VLP-MABSA)
 Codes and datasets for our ACL'2022 paper:[Vision-Language Pre-Training for Multimodal Aspect-Based Sentiment Analysis](https://aclanthology.org/2022.acl-long.152/)
 
-Author
-
-Yan Ling
-
-ylin@njust.edu.cn
-
+ 
 ## Data Processing
 The pre-training dataset we use is MVSA-Multi. You can get from this [git](https://github.com/xunan0812/MultiSentiNet). At first, you need to use the judgement rules provided by the git to remove the samples with inconsistent labels.
 ### Text Processing
