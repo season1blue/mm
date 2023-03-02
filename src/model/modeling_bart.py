@@ -288,6 +288,62 @@ class EncoderLayer(nn.Module):
         return x, attn_weights
 
 
+class CrossEncoderLayer(nn.Module):
+    def __init__(self, config: BartConfig):
+        super().__init__()
+        self.embed_dim = config.d_model
+        self.self_attn = Attention(self.embed_dim,
+                                   config.encoder_attention_heads,
+                                   dropout=config.attention_dropout)
+        self.normalize_before = config.normalize_before
+        self.self_attn_layer_norm = LayerNorm(self.embed_dim)
+        self.dropout = config.dropout
+        self.activation_fn = ACT2FN[config.activation_function]
+        self.activation_dropout = config.activation_dropout
+        self.fc1 = nn.Linear(self.embed_dim, config.encoder_ffn_dim)
+        self.fc2 = nn.Linear(config.encoder_ffn_dim, self.embed_dim)
+        self.final_layer_norm = LayerNorm(self.embed_dim)
+
+    def forward(self, x, encoder_padding_mask, output_attentions=False):
+        """
+        Args:
+            x (Tensor): input to the layer of shape `(seq_len, batch, embed_dim)`
+            encoder_padding_mask (ByteTensor): binary ByteTensor of shape
+                `(batch, src_len)` where padding elements are indicated by ``1``.
+            for t_tgt, t_src is excluded (or masked out), =0 means it is
+            included in attention
+
+        Returns:
+            encoded output of shape `(seq_len, batch, embed_dim)`
+        """
+        residual = x
+        if self.normalize_before:
+            x = self.self_attn_layer_norm(x)
+        x, attn_weights = self.self_attn(query=x,
+                                         key=x,
+                                         key_padding_mask=encoder_padding_mask,
+                                         output_attentions=output_attentions)
+        x = F.dropout(x, p=self.dropout, training=self.training)
+        x = residual + x
+        if not self.normalize_before:
+            x = self.self_attn_layer_norm(x)
+
+        residual = x
+        if self.normalize_before:
+            x = self.final_layer_norm(x)
+        x = self.activation_fn(self.fc1(x))
+        x = F.dropout(x, p=self.activation_dropout, training=self.training)
+        x = self.fc2(x)
+        x = F.dropout(x, p=self.dropout, training=self.training)
+        x = residual + x
+        if not self.normalize_before:
+            x = self.final_layer_norm(x)
+        if torch.isinf(x).any() or torch.isnan(x).any():
+            clamp_value = torch.finfo(x.dtype).max - 1000
+            x = torch.clamp(x, min=-clamp_value, max=clamp_value)
+        return x, attn_weights
+
+
 class BartEncoder(nn.Module):
     """
     Transformer encoder consisting of *config.encoder_layers* self attention layers. Each layer
