@@ -86,20 +86,9 @@ class MultiModalBartEncoder(nn.Module):
         """embed textual and visual inputs and combine them into one embedding"""
         mask = (input_ids == self.img_feat_id) | (input_ids == self.cls_token_id)
 
-
-        image_tensor = torch.cat([i.unsqueeze(0) for i in image_features], dim=0) # 32, 36, 2048
         # input_ids 32,72
-        embedded = self.embed_tokens(input_ids)  # [B,l,h]  32,72,768
-        image_length = image_tensor.size(1) + 1 + 1  # <img> XXXX </img>
-        text_tensor = embedded[:, image_length:, :]
-        # text_ids = input_ids[:, image_length:]
-        print(text_tensor.size())
-        print(image_tensor.size())
-        exit()
-
-
-
         embedded_images = self.embed_images(image_features)
+        embedded = self.embed_tokens(input_ids)  # [B,l,h]  32,72,768
 
         # print('mask shape', mask.shape)
         if not embedded_images[0].dtype == torch.float32:
@@ -144,12 +133,19 @@ class MultiModalBartEncoder(nn.Module):
         embed_pos = self.embed_positions(input_ids)  # [l, hideen_size]
         # print(embed_pos.size())  # 72,768
         # print(inputs_embeds.size()) # 32, 72, 768
-        x = inputs_embeds + embed_pos
+
+        x = inputs_embeds + embed_pos  # x: 32, 72, 768
         x = self.layernorm_embedding(x)
         x = F.dropout(x, p=self.dropout, training=self.training)
 
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
+
+        image_tensor = torch.cat([i.unsqueeze(0) for i in image_features], dim=0)
+        image_length = image_tensor.size(1)  # <img> XXXX </img>
+        text = x[image_length + 1 + 1:, :, :]  # 34, 32, 768
+        image = x[1: image_length + 1, :, :]  # 36, 32, 768
+
 
         encoder_states, all_attentions = [], []
         for encoder_layer in self.layers:
