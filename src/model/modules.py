@@ -47,6 +47,7 @@ class ImageEmbedding(nn.Module):
             index += l
         return output
 
+
 # https://github.com/huggingface/transformers/blob/main/src/transformers/models/bart/modeling_bart.py   BartEncoder
 class MultiModalBartEncoder(nn.Module):
     """
@@ -56,8 +57,9 @@ class MultiModalBartEncoder(nn.Module):
     Args:
         config: MultiModalBartConfig
     """
+
     def __init__(self, config: MultiModalBartConfig, encoder, img_feat_id,
-                 cls_token_id):
+                 cls_token_id, args):
         super().__init__()
 
         self.img_feat_id = img_feat_id
@@ -78,9 +80,11 @@ class MultiModalBartEncoder(nn.Module):
         self.embed_positions = encoder.embed_positions
 
         self.layers = encoder.layers
+        self.cross_layers = encoder.cross_layers
         self.layernorm_embedding = encoder.layernorm_embedding
         # mbart has one extra layer_norm
         self.layer_norm = encoder.layer_norm
+        self.region_num = args.region_num
 
     def _embed_multi_modal(self, input_ids, image_features):
         """embed textual and visual inputs and combine them into one embedding"""
@@ -141,22 +145,18 @@ class MultiModalBartEncoder(nn.Module):
         # B x T x C -> T x B x C
         x = x.transpose(0, 1)
 
-        image_tensor = torch.cat([i.unsqueeze(0) for i in image_features], dim=0)
-        image_length = image_tensor.size(1)  # <img> XXXX </img>
-        text = x[image_length + 1 + 1:, :, :]  # 34, 32, 768
-        image = x[1: image_length + 1, :, :]  # 36, 32, 768
-
-
         encoder_states, all_attentions = [], []
-        for encoder_layer in self.layers:
+        for encoder_layer in self.cross_layers:
             if output_hidden_states:
                 encoder_states.append(x)
             # add LayerDrop (see https://arxiv.org/abs/1909.11556 for description)
             dropout_probability = random.uniform(0, 1)
+
             if self.training and (dropout_probability < self.layerdrop):  # skip the layer
                 attn = None
             else:
-                x, attn = encoder_layer(x, attention_mask, output_attentions=output_attentions)
+                # IMPORTANT
+                x, attn = encoder_layer(x, attention_mask, self.region_num, output_attentions=output_attentions)
 
             if output_attentions:
                 all_attentions.append(attn)
@@ -172,14 +172,15 @@ class MultiModalBartEncoder(nn.Module):
         ]
         x = x.transpose(0, 1)
 
+
         if not return_dict:
-            return tuple(v for v in [x, encoder_states, all_attentions]
+            return tuple(v for v in [x, encoder_states]
                          if v is not None)
 
         return BaseModelOutput(last_hidden_state=x, hidden_states=encoder_states, attentions=all_attentions)
 
 
-class MultiModalBartDecoder_span(nn.Module):  #AOE task and all downstream tasks
+class MultiModalBartDecoder_span(nn.Module):  # AOE task and all downstream tasks
     def __init__(self,
                  config: MultiModalBartConfig,
                  tokenizer,
@@ -238,7 +239,7 @@ class MultiModalBartDecoder_span(nn.Module):  #AOE task and all downstream tasks
         if first is not None:
             src_tokens = src_tokens.gather(index=first, dim=1)
         word_mapped_tokens = src_tokens.gather(index=src_tokens_index, dim=1)
-        #print('word_mapped_tokens', word_mapped_tokens[0])
+        # print('word_mapped_tokens', word_mapped_tokens[0])
         tokens = torch.where(mapping_token_mask, tag_mapped_tokens,
                              word_mapped_tokens)
 
@@ -284,8 +285,8 @@ class MultiModalBartDecoder_span(nn.Module):  #AOE task and all downstream tasks
                 hidden_state,
                 self.dropout_layer(
                     self.decoder.embed_tokens.
-                    weight[self.label_start_id:self.label_start_id +
-                           3]))  # bsz x max_len x num_class
+                        weight[self.label_start_id:self.label_start_id +
+                                                   3]))  # bsz x max_len x num_class
             logits[:, :, 3:self.src_start_index] = tag_scores
         if not only_sc:
             eos_scores = F.linear(
@@ -339,7 +340,6 @@ class Span_loss(nn.Module):
         self.fc = nn.LogSoftmax(dim=-1)
 
     def forward(self, tgt_tokens, pred, mask):
-
         tgt_tokens = tgt_tokens.masked_fill(mask.eq(0), -100)
         output = F.cross_entropy(target=tgt_tokens, input=pred.transpose(1, 2))
         return output
@@ -368,7 +368,7 @@ class MultiModalBartDecoder_MLM(nn.Module):
             attention_mask,
             decoder_padding_mask,
             decoder_causal_mask=causal_mask[:decoder_input_ids.size(1), :
-                                            decoder_input_ids.size(1)],
+                                                                        decoder_input_ids.size(1)],
         )
 
         lm_logits = F.linear(decoder_outputs[0][:, 1:],
@@ -387,7 +387,7 @@ class MultiModalBartDecoder_MLM(nn.Module):
             return lm_loss
 
 
-class MultiModalBartDecoder_ANP_generate(nn.Module):  #AOG task
+class MultiModalBartDecoder_ANP_generate(nn.Module):  # AOG task
     def __init__(self, config: MultiModalBartConfig, decoder):
         super().__init__()
         self.config = config
@@ -411,7 +411,7 @@ class MultiModalBartDecoder_ANP_generate(nn.Module):  #AOG task
             attention_mask,
             decoder_padding_mask,
             decoder_causal_mask=causal_mask[:decoder_input_ids.size(1), :
-                                            decoder_input_ids.size(1)],
+                                                                        decoder_input_ids.size(1)],
         )
 
         lm_logits = F.linear(decoder_outputs[0][:, 1:],
@@ -431,7 +431,7 @@ class MultiModalBartDecoder_ANP_generate(nn.Module):  #AOG task
             return lm_loss
 
 
-class MultiModalBartDecoder_sentiment(nn.Module):  #MSP task
+class MultiModalBartDecoder_sentiment(nn.Module):  # MSP task
     def __init__(self,
                  config: MultiModalBartConfig,
                  decoder,
@@ -453,7 +453,6 @@ class MultiModalBartDecoder_sentiment(nn.Module):  #MSP task
 
     def forward(self, senti_labels, encoder_outputs, attention_mask,
                 senti_decoder_input_ids):
-
         decoder_outputs = self.decoder(
             input_ids=senti_decoder_input_ids,
             encoder_hidden_states=encoder_outputs,
@@ -507,7 +506,7 @@ class MultiModalBartDecoder_MRM(nn.Module):
             decoder_padding_mask=decoder_padding_mask,
             decoder_causal_mask=self.causal_mask[:mrm_decoder_input_ids.size(
                 1), :mrm_decoder_input_ids.size(1)].to(
-                    mrm_decoder_input_ids.device),
+                mrm_decoder_input_ids.device),
         )
         region_representation = decoder_outputs[0][mrm_masks.bool()]
         if len(region_representation) > 0:

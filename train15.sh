@@ -9,7 +9,7 @@ do
           --eval_every 1 \
           --lr ${sl} \
           --batch_size 32  \
-          --epochs 35 \
+          --epochs 1 \
           --grad_clip 5 \
           --warmup 0.1 \
           --seed 66 \

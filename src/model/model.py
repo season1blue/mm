@@ -75,7 +75,8 @@ class MultiModalBartModelForPretrain(FromPretrainedMixin, PretrainedBartModel):
 
         multimodal_encoder = MultiModalBartEncoder(config, encoder,
                                                    tokenizer.img_feat_id,
-                                                   tokenizer.cls_token_id)
+                                                   tokenizer.cls_token_id,
+                                                   args)
         return (multimodal_encoder, decoder)
 
     def __init__(self, config: MultiModalBartConfig, bart_model, tokenizer,

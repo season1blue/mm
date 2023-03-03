@@ -102,7 +102,7 @@ def main(rank, args):
     bos_token_id = 0  # 因为是特殊符号
     eos_token_id = 1
 
-    # checkpoint 和 重新训练 所加载的模型是不一样的， 需要提前加载一个ForPretrain
+    # checkpoint 和  所加载的模型是不一样的， 需要提前加载一个ForPretrain
     if args.checkpoint:
         pretrain_model = MultiModalBartModelForPretrain.from_pretrained(
             args.checkpoint,
@@ -132,6 +132,7 @@ def main(rank, args):
                                        pad_token_id=eos_token_id,
                                        restricter=None)
     else:
+        print("not checkpoint")
         seq2seq_model = MultiModalBartModel_AESC(bart_config, args, args.bart_model, tokenizer, label_ids)
         model = SequenceGeneratorModel(seq2seq_model,
                                        bos_token_id=bos_token_id,
@@ -398,6 +399,11 @@ def parse_args():
                         type=int,
                         default=0,
                         help='save the model or not')
+    parser.add_argument('--region_num',
+                        type=int,
+                        default=36,
+                        help='36 regions with the highest confidence')
+
     parser.add_argument('--task', type=str, default='', help='task type')
     args = parser.parse_args()
 

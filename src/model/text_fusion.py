@@ -19,7 +19,8 @@ class QuickGELU(nn.Module):
 
 
 class SpatialImageLanguageAttention(nn.Module):
-    def __init__(self, v_in_channels, l_in_channels, key_channels, value_channels, out_channels=None, num_heads=1):
+    def __init__(self, v_in_channels, l_in_channels, key_channels, value_channels, out_channels=None, num_heads=1,
+                 dropout=0.0):
         super(SpatialImageLanguageAttention, self).__init__()
         # x shape: (B, H*W, v_in_channels)
         # l input shape: (B, l_in_channels, N_l)
@@ -33,16 +34,16 @@ class SpatialImageLanguageAttention(nn.Module):
         if out_channels is None:
             self.out_channels = self.value_channels
 
-        # Keys: language features: (B, l_in_channels, #words)
-        # avoid any form of spatial normalization because a sentence contains many padding 0s
-        self.f_key = nn.Sequential(
-            nn.Conv1d(self.l_in_channels, self.key_channels, kernel_size=1, stride=1),
-        )
-
         # Queries: visual features: (B, H*W, v_in_channels)
         self.f_query = nn.Sequential(
             nn.Conv1d(self.v_in_channels, self.key_channels, kernel_size=1, stride=1),
             nn.InstanceNorm1d(self.key_channels),
+        )
+
+        # Keys: language features: (B, l_in_channels, #words)
+        # avoid any form of spatial normalization because a sentence contains many padding 0s
+        self.f_key = nn.Sequential(
+            nn.Conv1d(self.l_in_channels, self.key_channels, kernel_size=1, stride=1),
         )
 
         # Values: language features: (B, l_in_channels, #words)
@@ -56,18 +57,19 @@ class SpatialImageLanguageAttention(nn.Module):
             nn.InstanceNorm1d(self.out_channels),
         )
 
-    def forward(self, x, l, mask):
-        # x shape: (B, H*W, v_in_channels) vis
-        # l input shape: (B, l_in_channels, N_l) text
-        # l_mask shape: (B, N_l, 1)
-        B, HW = x.size(0), x.size(1)
-        x = x.permute(0, 2, 1)  # (B, key_channels, H*W)
+    def forward(self, vis, text, mask):
+        # vis shape: (H*W, B,  v_in_channels)
+        # text input shape: (N_l, B, l_in_channels)
+        # mask shape: (B, N_l, 1) (text mask)
+        HW, B = vis.size(0), vis.size(1)
+        vis = vis.permute(1, 2, 0)  # (B, key_channels, H*W)
+        text = text.permute(1, 2, 0)
         mask = mask.permute(0, 2, 1)  # (B, N_l, 1) -> (B, 1, N_l)
 
-        query = self.f_query(l)  # (B, self.key_channels, N_l)
-        key = self.f_key(x)
+        query = self.f_query(text)  # (B, self.key_channels, N_l)  (B, dim, N_l)
+        key = self.f_key(vis)
         key = key.permute(0, 2, 1)  # (B, HW, key_channels)
-        value = self.f_value(x)
+        value = self.f_value(vis)
         value = value.permute(0, 2, 1)  # (B, HW, key_channels)
         query = query * mask  # (B, key_channels, N_l)
         n_l = query.size(-1)
@@ -164,7 +166,9 @@ class TextTransformer(nn.Module):
         # self.resblocks = nn.Sequential(
         #     *[TextResidualAttentionBlock(width, heads, attn_mask) for _ in range(self.layer_num)])
 
-        self.resblocks = nn.ModuleList([TextResidualAttentionBlock(width, vis_dim=vis_dim, n_head=heads, attn_mask=attn_mask) for _ in range(self.layer_num)])
+        self.resblocks = nn.ModuleList(
+            [TextResidualAttentionBlock(width, vis_dim=vis_dim, n_head=heads, attn_mask=attn_mask) for _ in
+             range(self.layer_num)])
         # for i_layer in range(self.layer_num):
         #     layer = TextResidualAttentionBlock(width, vis_dim=vis_dim, n_head=heads, attn_mask=attn_mask)
         #     self.resblocks.append(layer)
